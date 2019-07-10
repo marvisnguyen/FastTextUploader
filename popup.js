@@ -35,16 +35,18 @@ $(function(){
     });
 
     $('#btnNext').click(function(){
-        chrome.storage.sync.get("data", function(result){
-            chrome.storage.sync.set({'data': nextForm(result.data, 1)}, function(){
+        chrome.storage.sync.get(["data", "field"], function(result){
+            chrome.storage.sync.set({'data': nextForm(result.data, 1), 
+                                    'field': nextForm(result.field, 1)}, function(){
                 //alert("Next Set!")
             });
         });
     });
 
     $('#btnPrev').click(function(){
-        chrome.storage.sync.get("data", function(result){
-            chrome.storage.sync.set({'data': nextForm(result.data, -1)}, function(){
+        chrome.storage.sync.get(["data", "field"], function(result){
+            chrome.storage.sync.set({'data': nextForm(result.data, -1), 
+                                    'field': nextForm(result.field, -1)}, function(){
                 //alert("Prev Set!")
             });
         });

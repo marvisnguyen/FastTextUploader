@@ -24,8 +24,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
         var textFields =  $("textarea").map(function(){
             return $(this).val();
         }).get();
-        
-		chrome.storage.sync.set({'data': itemFields, 'data2': textFields}, function(){
+
+		chrome.storage.sync.set({'data': itemFields, 'field': textFields}, function(){
             console.log('Data is set to ' + itemFields);
             console.log('Data2 is set to ' + textFields);
 		});
@@ -33,25 +33,37 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
     }
 
     if(request.todo == "pasteField"){
-        chrome.storage.sync.get("data", function(result){
+        chrome.storage.sync.get(["data", "field"], function(result){
             console.log('itemFields currently is ' + result.data);
-            console.log('itemFields currently is ' + result.data2);
+            console.log('itemFields currently is ' + result.field);
 
-            const amount = document.getElementsByTagName("input");
-            const textAmount = document.getElementsByTagName("textarea");
-            var amount2 = result.data.length;
-            j=0;
-            for(i = 0; i < amount.length; i++){
-                if(amount[i].type == "text" && j < amount2){
-                    $(amount[i]).val(result.data[j]);
-                    j++;
-                }
-            }
-            k=0;
-            for(i = 0; i < textAmount.length; i++){
-                $(textAmount[i]).val(result.data2[k]);
-                k++;
-            }   
+            $("*input:text").each(function(index){
+                //console.log("TextInput: " + index + " is " + result.data[index]);
+                $(this).val(result.data[index]);
+            });
+      
+            $("textarea").each(function(index){
+                //console.log("TextInput: " + index + " is " + result.field[index]);
+                $(this).val(result.field[index]);
+            });
+
+
+
+            // const amount = document.getElementsByTagName("input");
+            // const textAmount = document.getElementsByTagName("textarea");
+            // var amount2 = result.data.length;
+            // j=0;
+            // for(i = 0; i < amount.length; i++){
+            //     if(amount[i].type == "text" && j < amount2){
+            //         $(amount[i]).val(result.data[j]);
+            //         j++;
+            //     }
+            // }
+            // k=0;
+            // for(i = 0; i < textAmount.length; i++){
+            //     $(textAmount[i]).val(result.data2[k]);
+            //     k++;
+            // }   
 		});   
     }
 });
