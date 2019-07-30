@@ -4,18 +4,25 @@
         <title>Input Fields</title>
         <script src="jquery-3.4.1.min.js"></script>
         <script src="popup.js"></script>   
+        <style>
+            body{
+                min-width: 125px;
+                min-height: 50px;
+            }
+        </style>
     </head>
     <body>
-        <h3>Search Here</h3> 
-        <input type="text" id="searchBar"><br>
-        <input type="text" id="placeText"><br>
-        <input type="submit" id="btnChange" value="Enter">
-        <input type="submit" id="btnCopy" value="Copy">
-        <input type="submit" id="btnPaste" value="Paste"><br>
-        <input type="submit" id="btnPrev" value="Prev">
-        <input type="submit" id="btnNext" value="Next"><br>
+        <h1>Easy Next Letter</h1>
+        <div style="float:left;" id="container1">
+            <input type="submit" id="btnCopy" value="Copy">
+            <input type="submit" id="btnPaste" value="Paste">
+            <br>
+            
+            <br>
+            <input type="submit" id="btnPrev" value="Prev">
+            <input type="submit" id="btnNext" value="Next">
+        </div>
         <h3>Letter: <span id="currentLetter"></span></h3>
-        <textarea> Wassup </textarea>
 
     </body>
 </html>

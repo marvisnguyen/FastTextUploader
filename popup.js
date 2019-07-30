@@ -2,23 +2,6 @@ $(function(){
     chrome.storage.sync.get('currentLetter', function(findLetter){
         $('#currentLetter').text(findLetter.currentLetter);
     })
-
-    $('#btnChange').click(function(){
-        var want = $('#placeText').val();
-        $('#searchBar').val(want);
-        $("textarea").val(want);
-
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-            chrome.tabs.sendMessage(tabs[0].id, {todo: "changeField", enterSearch: want}, function(res){
-                const div = document.createElement('div')
-                div.textContent = `${res.count} inputs`
-                document.body.appendChild(div)
-                const div2 = document.createElement('div')
-                div2.textContent = `${res.textCount} text areas`
-                document.body.appendChild(div2)
-            });
-        });
-    });
     
     $('#btnCopy').click(function(){
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){

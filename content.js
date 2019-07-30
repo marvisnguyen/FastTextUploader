@@ -1,21 +1,5 @@
 
-var button = document.createElement("button");
-button.innerText = "Click Me"
-button['id'] = 'butt'
-button.onclick = function(){
-    alert("clicked")
-}
-
-document.body.appendChild(button);
-
-
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-    if(request.todo == "changeField"){
-        
-        $("*input:text").val(request.enterSearch);
-        $("textarea").val(request.enterSearch);
-        sendResponse({count: $("input").length, textCount: $('textarea').length})
-    }
     if(request.todo == "copyField"){
         var itemFields = $("*input:text").map(function(){
             return $(this).val();
@@ -46,24 +30,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
                 //console.log("TextInput: " + index + " is " + result.field[index]);
                 $(this).val(result.field[index]);
             });
-
-
-
-            // const amount = document.getElementsByTagName("input");
-            // const textAmount = document.getElementsByTagName("textarea");
-            // var amount2 = result.data.length;
-            // j=0;
-            // for(i = 0; i < amount.length; i++){
-            //     if(amount[i].type == "text" && j < amount2){
-            //         $(amount[i]).val(result.data[j]);
-            //         j++;
-            //     }
-            // }
-            // k=0;
-            // for(i = 0; i < textAmount.length; i++){
-            //     $(textAmount[i]).val(result.data2[k]);
-            //     k++;
-            // }   
 		});   
     }
 });
